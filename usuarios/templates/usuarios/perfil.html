@@ -35,7 +35,7 @@
                 {% for post in posts %}
                     <li class="list-group-item d-flex flex-wrap gap-2 align-items-center">
                         <a href="{{ post.get_absolute_url }}" class="me-auto">{{ post.titulo }}</a>
-                        <time datetime="{{ post.creado|date:'c' }}" class="small text-body-secondary">{{ post.creado|date }}</time>
+                        <time datetime="{{ post.creado|date:'Y-m-d' }}" class="small text-body-secondary">{{ post.creado|date }}</time>
                         <a href="{% url 'blog:editar' post.pk %}" class="btn btn-sm btn-outline-primary">Editar</a>
                         <a href="{% url 'blog:eliminar' post.pk %}" class="btn btn-sm btn-outline-danger">Eliminar</a>
                     </li>

@@ -13,8 +13,12 @@
         {% if campo.help_text %}
             <div class="form-text" id="{{ campo.auto_id }}_helptext">{{ campo.help_text|safe }}</div>
         {% endif %}
-        {% for error in campo.errors %}
-            <div class="text-danger small">{{ error }}</div>
-        {% endfor %}
+        {% if campo.errors %}
+            <div class="text-danger small" id="{{ campo.auto_id }}_error">
+                {% for error in campo.errors %}
+                    <p class="mb-0">{{ error }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
     </div>
 {% endfor %}

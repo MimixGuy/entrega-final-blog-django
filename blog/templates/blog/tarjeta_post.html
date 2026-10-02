@@ -14,6 +14,6 @@
     </div>
     <footer class="card-footer small text-body-secondary">
         {{ post.autor.get_full_name|default:post.autor.username }} ·
-        <time datetime="{{ post.creado|date:'c' }}">{{ post.creado|date }}</time>
+        <time datetime="{{ post.creado|date:'Y-m-d' }}">{{ post.creado|date }}</time>
     </footer>
 </article>

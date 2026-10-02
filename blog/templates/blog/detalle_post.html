@@ -11,7 +11,7 @@
         {% endif %}
         <p class="small text-body-secondary">
             Por {{ post.autor.get_full_name|default:post.autor.username }} ·
-            <time datetime="{{ post.creado|date:'c' }}">{{ post.creado|date }}</time>
+            <time datetime="{{ post.creado|date:'Y-m-d' }}">{{ post.creado|date }}</time>
         </p>
     </header>
 
