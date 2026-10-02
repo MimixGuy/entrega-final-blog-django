@@ -1,5 +1,8 @@
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth.models import User
+
+from .models import Perfil
 
 
 class EstiloBootstrapMixin:
@@ -20,3 +23,19 @@ class RegistroForm(EstiloBootstrapMixin, UserCreationForm):
 
 class LoginForm(EstiloBootstrapMixin, AuthenticationForm):
     pass
+
+
+class UsuarioForm(EstiloBootstrapMixin, forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['first_name', 'last_name', 'email']
+
+
+class PerfilForm(EstiloBootstrapMixin, forms.ModelForm):
+    class Meta:
+        model = Perfil
+        fields = ['avatar', 'biografia']
+        widgets = {
+            'avatar': forms.ClearableFileInput(attrs={'accept': 'image/*'}),
+            'biografia': forms.Textarea(attrs={'rows': 4}),
+        }

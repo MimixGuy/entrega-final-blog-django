@@ -26,7 +26,14 @@
                     </ul>
                     <ul class="navbar-nav align-items-lg-center">
                         {% if user.is_authenticated %}
-                            <li class="nav-item"><span class="navbar-text me-lg-2">Hola, {{ user.username }}</span></li>
+                            <li class="nav-item">
+                                <a class="nav-link d-flex align-items-center gap-2" href="{% url 'usuarios:perfil' %}">
+                                    {% if user.perfil.avatar %}
+                                        <img src="{{ user.perfil.avatar.url }}" alt="" class="avatar avatar-chico">
+                                    {% endif %}
+                                    Mi perfil ({{ user.username }})
+                                </a>
+                            </li>
                             <li class="nav-item">
                                 <form action="{% url 'usuarios:logout' %}" method="post">
                                     {% csrf_token %}

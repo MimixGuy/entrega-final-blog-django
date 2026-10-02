@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block titulo %}Mi perfil | De la barra al código{% endblock %}
+
+{% block contenido %}
+<div class="perfil mx-auto">
+    <section class="mb-5">
+        <header class="d-flex align-items-center gap-3 mb-3">
+            {% if perfil.avatar %}
+                <img src="{{ perfil.avatar.url }}" alt="Avatar de {{ user.username }}" class="avatar avatar-grande">
+            {% else %}
+                <span class="avatar avatar-grande avatar-inicial" aria-hidden="true">{{ user.username|first|upper }}</span>
+            {% endif %}
+            <div>
+                <h1 class="h3 mb-0">{{ user.get_full_name|default:user.username }}</h1>
+                <p class="text-body-secondary mb-0">@{{ user.username }}{% if user.email %} · {{ user.email }}{% endif %}</p>
+            </div>
+        </header>
+
+        {% if perfil.biografia %}
+            <p>{{ perfil.biografia|linebreaksbr }}</p>
+        {% else %}
+            <p class="text-body-secondary">Sin biografía todavía.</p>
+        {% endif %}
+
+        <p class="small text-body-secondary">Miembro desde el {{ user.date_joined|date }}</p>
+        <a href="{% url 'usuarios:editar_perfil' %}" class="btn btn-outline-primary btn-sm">Editar perfil</a>
+    </section>
+
+    <section aria-labelledby="titulo-mis-posts">
+        <h2 id="titulo-mis-posts" class="h4 mb-3">Mis publicaciones ({{ posts|length }})</h2>
+
+        {% if posts %}
+            <ul class="list-group">
+                {% for post in posts %}
+                    <li class="list-group-item d-flex flex-wrap gap-2 align-items-center">
+                        <a href="{{ post.get_absolute_url }}" class="me-auto">{{ post.titulo }}</a>
+                        <time datetime="{{ post.creado|date:'c' }}" class="small text-body-secondary">{{ post.creado|date }}</time>
+                        <a href="{% url 'blog:editar' post.pk %}" class="btn btn-sm btn-outline-primary">Editar</a>
+                        <a href="{% url 'blog:eliminar' post.pk %}" class="btn btn-sm btn-outline-danger">Eliminar</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p class="text-body-secondary">Aún no tienes publicaciones. <a href="{% url 'blog:crear' %}">Escribe la primera</a>.</p>
+        {% endif %}
+    </section>
+</div>
+{% endblock %}

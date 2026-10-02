@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block titulo %}Editar perfil | De la barra al código{% endblock %}
+
+{% block contenido %}
+<section class="formulario mx-auto">
+    <h1 class="h3 mb-3">Editar perfil</h1>
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <fieldset class="mb-2">
+            <legend class="h6">Datos personales</legend>
+            {% include 'campos_formulario.html' with form=form_usuario %}
+        </fieldset>
+        <fieldset class="mb-2">
+            <legend class="h6">Avatar y biografía</legend>
+            {% include 'campos_formulario.html' with form=form_perfil %}
+        </fieldset>
+        <div class="d-flex gap-2">
+            <button type="submit" class="btn btn-primary">Guardar</button>
+            <a href="{% url 'usuarios:perfil' %}" class="btn btn-outline-secondary">Cancelar</a>
+        </div>
+    </form>
+</section>
+{% endblock %}
