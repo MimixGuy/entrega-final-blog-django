@@ -1,0 +1,20 @@
+# Entorno virtual
+venv/
+.venv/
+
+# Variables de entorno (se sube solo .env.example)
+.env
+
+# Python
+__pycache__/
+*.pyc
+
+# Base de datos local e imagenes subidas por los usuarios
+db.sqlite3
+media/
+
+# Editor y sistema
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
