@@ -1,5 +1,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.messages.views import SuccessMessageMixin
+from django.db.models import Q
+from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView, DetailView, ListView, UpdateView
 
@@ -24,6 +26,20 @@ class ListaPostsView(ListView):
 class DetallePostView(DetailView):
     model = Post
     template_name = 'blog/detalle_post.html'
+
+
+def buscar(request):
+    busqueda = request.GET.get('q', '').strip()
+    resultados = Post.objects.none()
+    if busqueda:
+        resultados = Post.objects.filter(
+            Q(titulo__icontains=busqueda) | Q(contenido__icontains=busqueda)
+        )
+    contexto = {
+        'busqueda': busqueda,
+        'resultados': resultados,
+    }
+    return render(request, 'blog/resultados_busqueda.html', contexto)
 
 
 class CrearPostView(LoginRequiredMixin, SuccessMessageMixin, CreateView):

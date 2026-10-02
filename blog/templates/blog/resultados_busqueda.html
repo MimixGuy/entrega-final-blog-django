@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block titulo %}Buscar | De la barra al código{% endblock %}
+
+{% block contenido %}
+<h1 class="h3 mb-3">Resultados de búsqueda</h1>
+
+{% if busqueda %}
+    {% if resultados %}
+        <section aria-labelledby="titulo-resultados">
+            <h2 id="titulo-resultados" class="h5 mb-3">{{ resultados|length }} resultado{{ resultados|length|pluralize }} para «{{ busqueda }}»</h2>
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+                {% for post in resultados %}
+                    <div class="col">
+                        {% include 'blog/tarjeta_post.html' %}
+                    </div>
+                {% endfor %}
+            </div>
+        </section>
+    {% else %}
+        <div class="alert alert-warning" role="status">
+            No se encontraron publicaciones para «{{ busqueda }}». Prueba con otra palabra.
+        </div>
+    {% endif %}
+{% else %}
+    <p class="text-body-secondary">Escribe algo en el buscador para encontrar posts por título o por contenido.</p>
+{% endif %}
+
+<a href="{% url 'blog:lista' %}">« Volver al inicio</a>
+{% endblock %}

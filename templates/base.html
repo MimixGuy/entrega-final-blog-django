@@ -24,6 +24,10 @@
                             <li class="nav-item"><a class="nav-link" href="{% url 'blog:crear' %}">Escribir un post</a></li>
                         {% endif %}
                     </ul>
+                    <form class="d-flex my-2 my-lg-0 me-lg-3" action="{% url 'blog:buscar' %}" method="get" role="search">
+                        <input class="form-control form-control-sm me-2" type="search" name="q" value="{{ busqueda }}" placeholder="Buscar posts" aria-label="Buscar posts por título o contenido">
+                        <button class="btn btn-sm btn-outline-light" type="submit">Buscar</button>
+                    </form>
                     <ul class="navbar-nav align-items-lg-center">
                         {% if user.is_authenticated %}
                             <li class="nav-item">
