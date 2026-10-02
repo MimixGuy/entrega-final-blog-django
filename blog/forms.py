@@ -14,5 +14,5 @@ class PostForm(forms.ModelForm):
             'imagen': forms.ClearableFileInput(attrs={'class': 'form-control', 'accept': 'image/*'}),
         }
         help_texts = {
-            'imagen': 'Opcional. Si no subes ninguna, el post se publica sin portada.',
+            'imagen': 'Opcional.',
         }

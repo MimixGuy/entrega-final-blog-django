@@ -46,7 +46,7 @@ class CrearPostView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = Post
     form_class = PostForm
     template_name = 'blog/formulario_post.html'
-    success_message = 'El post «%(titulo)s» se publicó correctamente.'
+    success_message = 'El post "%(titulo)s" se publicó correctamente.'
 
     def form_valid(self, form):
         form.instance.autor = self.request.user
