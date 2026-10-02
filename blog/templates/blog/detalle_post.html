@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block titulo %}{{ post.titulo }} | De la barra al código{% endblock %}
+
+{% block contenido %}
+<article class="post mx-auto">
+    <header class="mb-4">
+        <h1>{{ post.titulo }}</h1>
+        {% if post.subtitulo %}
+            <p class="lead">{{ post.subtitulo }}</p>
+        {% endif %}
+        <p class="small text-body-secondary">
+            Por {{ post.autor.get_full_name|default:post.autor.username }} ·
+            <time datetime="{{ post.creado|date:'c' }}">{{ post.creado|date }}</time>
+        </p>
+    </header>
+
+    {% if post.imagen %}
+        <figure class="mb-4">
+            <img src="{{ post.imagen.url }}" class="img-fluid rounded" alt="Portada de {{ post.titulo }}">
+        </figure>
+    {% endif %}
+
+    <div class="contenido-post">
+        {{ post.contenido|linebreaks }}
+    </div>
+
+    <footer class="mt-4 pt-3 border-top">
+        <a href="{% url 'blog:lista' %}">« Volver al inicio</a>
+    </footer>
+</article>
+{% endblock %}

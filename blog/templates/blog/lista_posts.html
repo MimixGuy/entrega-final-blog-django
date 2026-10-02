@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block titulo %}Inicio | De la barra al código{% endblock %}
+
+{% block contenido %}
+<section class="presentacion mb-4">
+    <h1>De la barra al código</h1>
+    <p class="lead">Apuntes de un barman que está aprendiendo a programar.</p>
+</section>
+
+<section aria-labelledby="titulo-publicaciones">
+    <h2 id="titulo-publicaciones" class="h4 mb-3">Últimas publicaciones</h2>
+
+    {% if posts %}
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+            {% for post in posts %}
+                <div class="col">
+                    {% include 'blog/tarjeta_post.html' %}
+                </div>
+            {% endfor %}
+        </div>
+
+        {% if is_paginated %}
+            <nav class="mt-4" aria-label="Páginas de publicaciones">
+                <ul class="pagination justify-content-center">
+                    {% if page_obj.has_previous %}
+                        <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">« Anterior</a></li>
+                    {% endif %}
+                    <li class="page-item disabled"><span class="page-link">Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}</span></li>
+                    {% if page_obj.has_next %}
+                        <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">Siguiente »</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+        {% endif %}
+    {% else %}
+        <p class="text-body-secondary">Todavía no hay publicaciones.</p>
+    {% endif %}
+</section>
+{% endblock %}

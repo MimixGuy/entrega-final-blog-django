@@ -1,0 +1,19 @@
+<article class="card h-100 tarjeta-post">
+    {% if post.imagen %}
+        <img src="{{ post.imagen.url }}" class="card-img-top" alt="Portada de {{ post.titulo }}">
+    {% else %}
+        <div class="card-img-top sin-imagen" aria-hidden="true"></div>
+    {% endif %}
+    <div class="card-body">
+        <h3 class="h5 card-title">
+            <a href="{{ post.get_absolute_url }}" class="stretched-link">{{ post.titulo }}</a>
+        </h3>
+        {% if post.subtitulo %}
+            <p class="card-text text-body-secondary">{{ post.subtitulo }}</p>
+        {% endif %}
+    </div>
+    <footer class="card-footer small text-body-secondary">
+        {{ post.autor.get_full_name|default:post.autor.username }} ·
+        <time datetime="{{ post.creado|date:'c' }}">{{ post.creado|date }}</time>
+    </footer>
+</article>
