@@ -34,7 +34,14 @@
             </nav>
         {% endif %}
     {% else %}
-        <p class="text-body-secondary">Todavía no hay publicaciones.</p>
+        <p class="text-body-secondary">
+            Todavía no hay publicaciones.
+            {% if user.is_authenticated %}
+                <a href="{% url 'blog:crear' %}">Escribe la primera</a>.
+            {% else %}
+                <a href="{% url 'usuarios:registro' %}">Crea una cuenta</a> para escribir la primera.
+            {% endif %}
+        </p>
     {% endif %}
 </section>
 {% endblock %}

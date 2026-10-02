@@ -1,6 +1,17 @@
-from django.views.generic import DetailView, ListView
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.messages.views import SuccessMessageMixin
+from django.urls import reverse_lazy
+from django.views.generic import CreateView, DeleteView, DetailView, ListView, UpdateView
 
+from .forms import PostForm
 from .models import Post
+
+
+class SoloAutorMixin(UserPassesTestMixin):
+    """Solo deja pasar al autor del post. A cualquier otro usuario le devuelve un 403."""
+
+    def test_func(self):
+        return self.get_object().autor == self.request.user
 
 
 class ListaPostsView(ListView):
@@ -13,3 +24,28 @@ class ListaPostsView(ListView):
 class DetallePostView(DetailView):
     model = Post
     template_name = 'blog/detalle_post.html'
+
+
+class CrearPostView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
+    model = Post
+    form_class = PostForm
+    template_name = 'blog/formulario_post.html'
+    success_message = 'El post «%(titulo)s» se publicó correctamente.'
+
+    def form_valid(self, form):
+        form.instance.autor = self.request.user
+        return super().form_valid(form)
+
+
+class EditarPostView(LoginRequiredMixin, SoloAutorMixin, SuccessMessageMixin, UpdateView):
+    model = Post
+    form_class = PostForm
+    template_name = 'blog/formulario_post.html'
+    success_message = 'Cambios guardados.'
+
+
+class EliminarPostView(LoginRequiredMixin, SoloAutorMixin, SuccessMessageMixin, DeleteView):
+    model = Post
+    template_name = 'blog/confirmar_eliminar.html'
+    success_url = reverse_lazy('blog:lista')
+    success_message = 'El post se eliminó.'

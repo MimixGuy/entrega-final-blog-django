@@ -47,6 +47,10 @@ body {
     max-width: 520px;
 }
 
+.formulario-post {
+    max-width: 760px;
+}
+
 .pie {
     background-color: #212529;
     color: #adb5bd;

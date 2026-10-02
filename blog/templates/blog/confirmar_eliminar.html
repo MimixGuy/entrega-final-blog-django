@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block titulo %}Eliminar post | De la barra al código{% endblock %}
+
+{% block contenido %}
+<section class="formulario mx-auto">
+    <h1 class="h3 mb-3">Eliminar post</h1>
+    <p>¿Seguro que quieres eliminar «{{ post.titulo }}»? No se puede deshacer.</p>
+
+    <form method="post" class="d-flex gap-2">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Sí, eliminar</button>
+        <a href="{{ post.get_absolute_url }}" class="btn btn-outline-secondary">Cancelar</a>
+    </form>
+</section>
+{% endblock %}

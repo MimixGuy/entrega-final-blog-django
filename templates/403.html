@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block titulo %}Sin permiso | De la barra al código{% endblock %}
+
+{% block contenido %}
+<section class="text-center py-5">
+    <h1 class="h3">No tienes permiso para hacer esto</h1>
+    <p class="text-body-secondary">Solo el autor de un post puede editarlo o eliminarlo.</p>
+    <a href="{% url 'blog:lista' %}" class="btn btn-primary">Volver al inicio</a>
+</section>
+{% endblock %}
