@@ -42,6 +42,11 @@ body {
     line-height: 1.7;
 }
 
+/* Formularios de registro, login y posts */
+.formulario {
+    max-width: 520px;
+}
+
 .pie {
     background-color: #212529;
     color: #adb5bd;

@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block titulo %}Iniciar sesión | De la barra al código{% endblock %}
+
+{% block contenido %}
+<section class="formulario mx-auto">
+    <h1 class="h3 mb-3">Iniciar sesión</h1>
+
+    {% if next %}
+        <p class="alert alert-info">Para entrar en esa página tienes que iniciar sesión.</p>
+    {% endif %}
+
+    <form method="post">
+        {% csrf_token %}
+        {% include 'campos_formulario.html' %}
+        <input type="hidden" name="next" value="{{ next }}">
+        <button type="submit" class="btn btn-primary w-100">Entrar</button>
+    </form>
+
+    <p class="mt-3 small">¿Todavía no tienes cuenta? <a href="{% url 'usuarios:registro' %}">Regístrate</a></p>
+</section>
+{% endblock %}

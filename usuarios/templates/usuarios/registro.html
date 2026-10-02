@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block titulo %}Crear cuenta | De la barra al código{% endblock %}
+
+{% block contenido %}
+<section class="formulario mx-auto">
+    <h1 class="h3 mb-3">Crear una cuenta</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        {% include 'campos_formulario.html' %}
+        <button type="submit" class="btn btn-primary w-100">Registrarme</button>
+    </form>
+
+    <p class="mt-3 small">¿Ya tienes cuenta? <a href="{% url 'usuarios:login' %}">Inicia sesión</a></p>
+</section>
+{% endblock %}
