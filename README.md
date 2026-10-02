@@ -17,7 +17,7 @@ Trabajo de barman y estoy aprendiendo a programar, así que el blog va de eso: l
 
 - Listado de publicaciones, de la más nueva a la más antigua y con 6 por página, y detalle de cada una.
 - Crear, editar y eliminar publicaciones desde la web, no solo desde el admin.
-- Imagen de portada opcional. Si un post no tiene, en su lugar se ve un fondo de color.
+- Imagen de portada opcional. Si un post no la tiene, en el listado se ve un fondo de color en su lugar.
 - Registro, inicio y cierre de sesión.
 - Perfil de usuario con avatar y biografía, los dos editables.
 - Buscador por título o contenido, que avisa cuando no encuentra nada.
@@ -41,9 +41,13 @@ Hace falta Git y Python 3.12 o superior (es lo que pide Django 6.0).
    python -m venv venv
    ```
 
+   En macOS o Linux, si no existe el comando `python`, usar `python3`. Para activarlo:
+
    - Windows (CMD o PowerShell): `venv\Scripts\activate`
    - Windows con Git Bash: `source venv/Scripts/activate`
-   - macOS o Linux: `source venv/bin/activate` (si no existe el comando `python`, usar `python3`)
+   - macOS o Linux: `source venv/bin/activate`
+
+   Si PowerShell avisa de que la ejecución de scripts está deshabilitada, se puede activar desde CMD o permitirlo una vez con `Set-ExecutionPolicy -Scope CurrentUser RemoteSigned`.
 
 3. Instalar las dependencias:
 
@@ -57,13 +61,13 @@ Hace falta Git y Python 3.12 o superior (es lo que pide Django 6.0).
    cp .env.example .env
    ```
 
-   En el CMD de Windows es `copy .env.example .env`. Con los valores del ejemplo el proyecto ya funciona en local. Para usar una clave propia se puede generar una con:
+   En el CMD de Windows es `copy .env.example .env`. Sin este archivo el proyecto no arranca (sale el error `SECRET_KEY not found`). Con los valores del ejemplo ya funciona en local. Para usar una clave propia se puede generar una con:
 
    ```bash
    python -c "from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())"
    ```
 
-   y pegarla en `SECRET_KEY`. `DEBUG` tiene que quedar en `True` para desarrollo, porque con `DEBUG=False` Django deja de servir las imágenes subidas.
+   y pegarla en `SECRET_KEY`. `DEBUG` tiene que quedar en `True` para desarrollo, porque con `DEBUG=False` el servidor de desarrollo deja de servir las imágenes subidas y los estilos.
 
 5. Aplicar las migraciones:
 
